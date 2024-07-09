@@ -22,13 +22,45 @@
                         document.open();
                         document.write(data.content);
                         document.write(`<base href="${url}"><script>
+                            function getData(url) {
+                                fetch('http://127.0.0.1:5000/api/proxy?url=' + encodeURIComponent(url))
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.content) {
+                                            document.open();
+                                            document.write(data.content);
+                                            document.write('<base href="' + url + '"><script>' +
+                                                'function getData(url) {' +
+                                                'fetch("http://127.0.0.1:5000/api/proxy?url=" + encodeURIComponent(url))' +
+                                                '.then(response => response.json())' +
+                                                '.then(data => {' +
+                                                'if (data.content) {' +
+                                                'document.open();' +
+                                                'document.write(data.content);' +
+                                                'document.write("<base href=\\"" + url + "\\"><script>" +' +
+                                                '"function getData(url) {fetch(\\"http://127.0.0.1:5000/api/proxy?url=\\" + encodeURIComponent(url)).then(response => response.json()).then(data => {if (data.content) {document.open();document.write(data.content);document.write(\\"<base href=\\"" + url + "\\""><script>getData\\(url\\);<\\/script>\\");document.close();} else {document.getElementById(\\"output\\").innerHTML = \\"No HTML content received\\";}}).catch(error => console.error(\\"Error:\\", error));}" + "</script>");' +
+                                                'document.close();' +
+                                                '} else {' +
+                                                'document.getElementById("output").innerHTML = "No HTML content received";' +
+                                                '}' +
+                                                '})' +
+                                                '.catch(error => console.error("Error:", error));' +
+                                                '}' +
+                                                '<\\/script>');
+                                            document.close();
+                                        } else {
+                                            document.getElementById('output').innerHTML = 'No HTML content received';
+                                        }
+                                    })
+                                    .catch(error => console.error('Error:', error));
+                            }
                             document.querySelectorAll('a').forEach(a => {
                                 a.addEventListener('click', function(event) {
                                     event.preventDefault();
                                     getData(this.href);
                                 });
                             });
-                        </script>`);
+                        <\\/script>`);
                         document.close();
                     } else {
                         document.getElementById('output').innerHTML = 'No HTML content received';
