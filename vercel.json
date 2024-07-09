@@ -1,10 +1,16 @@
 {
-  "functions": {
-    "api": {
-      "/proxy": {
-        "handler": "app.proxy",
-        "methods": ["GET", "POST"]
-      }
+  "builds": [
+    {
+      "src": "api/proxy.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "index.html",
+      "use": "@vercel/static"
     }
-  }
+  ],
+  "routes": [
+    { "src": "/api/proxy", "dest": "/api/proxy.py" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
 }
