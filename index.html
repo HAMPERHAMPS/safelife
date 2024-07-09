@@ -21,6 +21,7 @@
                     if (data.content) {
                         document.open();
                         document.write(data.content);
+                        document.write(`<base href="${url}">`);
                         document.close();
                     } else {
                         document.getElementById('output').innerHTML = 'No HTML content received';
