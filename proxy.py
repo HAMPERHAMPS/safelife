@@ -1,20 +1,27 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import requests
 
 app = Flask(__name__)
-
-@app.route('/', methods=['GET', 'POST'])
+CORS(app)
+@app.route('/api/proxy', methods=['GET', 'POST'])
 def proxy():
-    url = request.args.get('url')
-    if url:
-        response = requests.get(url)
+    try:
+        url = request.args.get('url')
+    
+        if url:
+            response = requests.get(url)
+            return jsonify({
+                'status_code': response.status_code,
+                'content': response.text
+            })
+
+    except:
         return jsonify({
-            'status_code': response.status_code,
-            'content': response.text
+            'status_code': 1,
+            'content': """<p style="color: red;">NYOOOOOoOooOOOo that site doesnt exist.</p>"""
         })
-    return jsonify({
-        'error': '1:nourl'
-    })
+    
 
 if __name__ == '__main__':
     app.run(debug=True)
