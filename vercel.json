@@ -7,7 +7,7 @@
     {
       "src": "index.html",
       "use": "@vercel/static"
-    }
+    },
     {
       "src": "bg.png",
       "use": "@vercel.static"
@@ -15,7 +15,7 @@
   ],
   "routes": [
     { "src": "/api/proxy", "dest": "/api/proxy.py" },
-    { "src": "/", "dest": "/index.html" }
+    { "src": "/(.*)", "dest": "/index.html" },
     { "src": "/bg.png", "dest": "/bg.png" }
   ]
 }
