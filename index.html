@@ -13,7 +13,7 @@
     <script>
         function getData() {
         var inputElement = document.getElementById('smashanpass');
-        function getData() {
+        
             var url = inputElement.value;  
             fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
