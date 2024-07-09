@@ -22,7 +22,7 @@
                         document.open();
                         document.write(data.content);
                         document.close();
-                        updateLinks(url);
+                        interceptLinks(url);
                     } else {
                         document.getElementById('output').innerHTML = 'No HTML content received';
                     }
@@ -30,13 +30,31 @@
                 .catch(error => console.error('Error:', error));
         }
 
-        function updateLinks(baseUrl) {
+        function interceptLinks(baseUrl) {
             var links = document.getElementsByTagName('a');
             for (var i = 0; i < links.length; i++) {
-                if (links[i].href.startsWith('/')) {
-                    links[i].href = new URL(links[i].getAttribute('href'), baseUrl).href;
-                }
+                links[i].addEventListener('click', function(event) {
+                    event.preventDefault();
+                    var url = new URL(this.href, baseUrl).href;
+                    fetchContent(url);
+                });
             }
+        }
+
+        function fetchContent(url) {
+            fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.content) {
+                        document.open();
+                        document.write(data.content);
+                        document.close();
+                        interceptLinks(url);
+                    } else {
+                        document.getElementById('output').innerHTML = 'No HTML content received';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
         }
     </script>
 </body>
