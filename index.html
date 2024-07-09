@@ -63,7 +63,10 @@
                     links[i].addEventListener('click', function(event) {
                         event.preventDefault(); // Prevent the default link behavior
                         var urlsd = this.href;
-                        if (!urlsd.includes("https://")) {
+                        if (urlsd.includes(lastRemadeURL)) {
+                            console.log("u good bro")
+                        }
+                        else {
                             // Construct full URL using base URL and last part of href
                             urlsd = lastRemadeURL + urlsd;
                              // Store the last remade URL in the global variable
