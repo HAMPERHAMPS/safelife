@@ -11,11 +11,8 @@
     <div id="output"></div>
 
     <script>
-
-        function gatdata(linkus) {
-            
-            var url = linkus;  
-
+        // Function to fetch content using proxy
+        function fetchData(url) {
             fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
                 .then(data => {
@@ -23,74 +20,37 @@
                         document.open();
                         document.write(data.content);
                         document.close();
-                        
+                        // Perform additional actions if needed
                     } else {
-                        document.getElementById('output').innerHTML = '<p style="color: red;">NYOOOOOoOooOOOo that site doesnt exist.</p>';
+                        document.getElementById('output').innerHTML = '<p style="color: red;">The site does not exist or could not be fetched.</p>';
                     }
                 })
                 .catch(error => console.error('Error:', error));
-            gaygoobs()
         }
-            
+
+        // Function to handle form submission
         function getData() {
             var inputElement = document.getElementById('smashanpass');
-            var url = inputElement.value;  
-
-            fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.content) {
-                        document.open();
-                        document.write(data.content);
-                        document.close();
-                        
-                    } else {
-                        document.getElementById('output').innerHTML = '<p style="color: red;">NYOOOOOoOooOOOo that site doesnt exist.</p>';
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-            gaygoobs()
-        }
-
-        function interceptLinks(baseUrl) {
-            var links = document.getElementsByTagName('a');
-            for (var i = 0; i < links.length; i++) {
-                links[i].addEventListener('click', function(event) {
-                    event.preventDefault();
-                    var url = new URL(this.href, baseUrl).href;
-                    fetchContent(url);
-                });
+            var url = inputElement.value.trim(); // Trim whitespace
+            
+            if (url) {
+                fetchData(url);
+            } else {
+                document.getElementById('output').innerHTML = '<p style="color: red;">Please enter a valid URL.</p>';
             }
         }
 
-        function fetchContent(url) {
-            fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.content) {
-                        document.open();
-                        document.write(data.content);
-                        document.close();
-                        gaygoobs()
-                    } else {
-                        document.getElementById('output').innerHTML = 'No HTML content received';
-                    }
-                })
-                .catch(error => console.error('Error:', error));
-        }
-        function gaygoobs() {
+        // Add click event listener to all <a> tags
+        document.addEventListener('DOMContentLoaded', function() {
             var links = document.getElementsByTagName('a');
-
-            // Loop through each link and add a click event listener
             for (var i = 0; i < links.length; i++) {
                 links[i].addEventListener('click', function(event) {
                     event.preventDefault(); // Prevent the default link behavior
-                    alert('Link clicked: ' + this.textContent); // Alert with the link text
-                    var urssl = this.href;
-                    gatdata(urssl)
+                    var url = this.href;
+                    fetchData(url); // Fetch content using proxy
                 });
             }
-        }
+        });
     </script>
 </body>
 </html>
