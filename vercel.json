@@ -1,0 +1,10 @@
+{
+  "functions": {
+    "api": {
+      "/proxy": {
+        "handler": "app.proxy",
+        "methods": ["GET", "POST"]
+      }
+    }
+  }
+}
