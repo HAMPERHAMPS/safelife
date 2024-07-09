@@ -22,9 +22,9 @@
                         document.open();
                         document.write(data.content);
                         document.close();
-                        interceptLinks(url);
+                        
                     } else {
-                        document.getElementById('output').innerHTML = 'No HTML content received';
+                        document.getElementById('output').innerHTML = '<p style="color: red;">NYOOOOOoOooOOOo that site doesnt exist.</p>';
                     }
                 })
                 .catch(error => console.error('Error:', error));
