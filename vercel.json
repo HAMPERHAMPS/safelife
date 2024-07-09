@@ -14,7 +14,7 @@
     }
   ],
   "routes": [
-    { "src": "/api/proxy", "dest": "/api/proxy" },
+    { "src": "/api/proxy", "dest": "/api/proxy/api/proxy" },
     { "src": "/bg.png", "dest": "/bg.png" },
     { "src": "/(.*)", "dest": "/index.html" }
     
