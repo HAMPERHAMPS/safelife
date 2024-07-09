@@ -12,14 +12,17 @@
 
     <script>
         function getData() {
-        var inputElement = document.getElementById('smashanpass');
-        
+            var inputElement = document.getElementById('smashanpass');
             var url = inputElement.value;  
+
             fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('output').innerHTML = JSON.stringify(data, null, 2);
-
+                    if (data.html) {
+                        document.documentElement.innerHTML = data.html;
+                    } else {
+                        document.getElementById('output').innerHTML = 'No HTML content received';
+                    }
                 })
                 .catch(error => console.error('Error:', error));
         }
