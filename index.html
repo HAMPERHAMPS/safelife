@@ -11,9 +11,9 @@
     <div id="output"></div>
 
     <script>
-        function getData() {
+        function getData(url = null) {
             var inputElement = document.getElementById('smashanpass');
-            var url = inputElement.value;  
+            url = url || inputElement.value;
 
             fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
@@ -21,7 +21,14 @@
                     if (data.content) {
                         document.open();
                         document.write(data.content);
-                        document.write(`<base href="${url}">`);
+                        document.write(`<base href="${url}"><script>
+                            document.querySelectorAll('a').forEach(a => {
+                                a.addEventListener('click', function(event) {
+                                    event.preventDefault();
+                                    getData(this.href);
+                                });
+                            });
+                        </script>`);
                         document.close();
                     } else {
                         document.getElementById('output').innerHTML = 'No HTML content received';
