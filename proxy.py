@@ -3,7 +3,7 @@ import requests
 
 app = Flask(__name__)
 
-@app.route('/api/proxy', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def proxy():
     url = request.args.get('url')
     if url:
