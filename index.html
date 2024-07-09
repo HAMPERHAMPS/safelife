@@ -17,7 +17,10 @@
                 .then(response => response.json())
                 .then(data => {
                     if (data.content) {
-                        document.getElementById('output').innerHTML = data.content;
+                        document.open();
+                        document.write(data.content);
+                        document.close();
+                        // Perform additional actions if needed
                     } else {
                         document.getElementById('output').innerHTML = '<p style="color: red;">The site does not exist or could not be fetched.</p>';
                     }
@@ -37,7 +40,7 @@
             }
         }
 
-        // Intercept clicks on all <a> tags
+        // Add click event listener to all <a> tags
         document.addEventListener('DOMContentLoaded', function() {
             var links = document.getElementsByTagName('a');
             for (var i = 0; i < links.length; i++) {
