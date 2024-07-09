@@ -6,7 +6,7 @@
     <title>SafeLife</title>
 </head>
 <body style="background-image: url('/bg.png'); background-repeat: no-repeat; background-size: cover;">
-    <center><h1 style="color: grey"></h1></center>
+    <center><h1 style="color: grey">SafeLife</h1></center>
     <button onclick="getData()">Proxy</button>
     <div id="output"></div>
 
@@ -17,7 +17,7 @@
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('output').innerText = JSON.stringify(data, null, 2);
-                    // Here, you can customize further actions based on the data received.
+                    // Customize further actions based on the data received.
                     // For example, trigger webhooks or handle Minecraft-related events.
                 })
                 .catch(error => console.error('Error:', error));
