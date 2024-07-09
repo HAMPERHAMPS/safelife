@@ -11,9 +11,9 @@
     <div id="output"></div>
 
     <script>
-        function getData(url = null) {
+        function getData() {
             var inputElement = document.getElementById('smashanpass');
-            url = url || inputElement.value;
+            var url = inputElement.value;  
 
             fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
@@ -21,52 +21,22 @@
                     if (data.content) {
                         document.open();
                         document.write(data.content);
-                        document.write(`<base href="${url}"><script>
-                            function getData(url) {
-                                fetch('http://127.0.0.1:5000/api/proxy?url=' + encodeURIComponent(url))
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        if (data.content) {
-                                            document.open();
-                                            document.write(data.content);
-                                            document.write('<base href="' + url + '"><script>' +
-                                                'function getData(url) {' +
-                                                'fetch("http://127.0.0.1:5000/api/proxy?url=" + encodeURIComponent(url))' +
-                                                '.then(response => response.json())' +
-                                                '.then(data => {' +
-                                                'if (data.content) {' +
-                                                'document.open();' +
-                                                'document.write(data.content);' +
-                                                'document.write("<base href=\\"" + url + "\\"><script>" +' +
-                                                '"function getData(url) {fetch(\\"http://127.0.0.1:5000/api/proxy?url=\\" + encodeURIComponent(url)).then(response => response.json()).then(data => {if (data.content) {document.open();document.write(data.content);document.write(\\"<base href=\\"" + url + "\\""><script>getData\\(url\\);<\\/script>\\");document.close();} else {document.getElementById(\\"output\\").innerHTML = \\"No HTML content received\\";}}).catch(error => console.error(\\"Error:\\", error));}" + "</script>");' +
-                                                'document.close();' +
-                                                '} else {' +
-                                                'document.getElementById("output").innerHTML = "No HTML content received";' +
-                                                '}' +
-                                                '})' +
-                                                '.catch(error => console.error("Error:", error));' +
-                                                '}' +
-                                                '<\\/script>');
-                                            document.close();
-                                        } else {
-                                            document.getElementById('output').innerHTML = 'No HTML content received';
-                                        }
-                                    })
-                                    .catch(error => console.error('Error:', error));
-                            }
-                            document.querySelectorAll('a').forEach(a => {
-                                a.addEventListener('click', function(event) {
-                                    event.preventDefault();
-                                    getData(this.href);
-                                });
-                            });
-                        <\\/script>`);
                         document.close();
+                        updateLinks(url);
                     } else {
                         document.getElementById('output').innerHTML = 'No HTML content received';
                     }
                 })
                 .catch(error => console.error('Error:', error));
+        }
+
+        function updateLinks(baseUrl) {
+            var links = document.getElementsByTagName('a');
+            for (var i = 0; i < links.length; i++) {
+                if (links[i].href.startsWith('/')) {
+                    links[i].href = new URL(links[i].getAttribute('href'), baseUrl).href;
+                }
+            }
         }
     </script>
 </body>
