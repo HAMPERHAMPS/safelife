@@ -16,7 +16,7 @@
             fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+                    document.getElementById('output').innerHTML = JSON.stringify(data, null, 2);
                     // Customize further actions based on the data received.
                     // For example, trigger webhooks or handle Minecraft-related events.
                 })
