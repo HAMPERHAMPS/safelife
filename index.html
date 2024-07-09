@@ -55,7 +55,7 @@
                     links[i].addEventListener('click', function(event) {
                         event.preventDefault(); // Prevent the default link behavior
                         var urlsd = this.href;
-                        if (!url.includes("https://")) {
+                        if (!urlsd.includes("https://")) {
                             urlsd = url + urlsd;
                         }
                         fetchData(urlsd); // Fetch content using proxy
