@@ -29,6 +29,7 @@
                     }
                 })
                 .catch(error => console.error('Error:', error));
+            gaygoobs()
         }
             
         function getData() {
@@ -48,6 +49,7 @@
                     }
                 })
                 .catch(error => console.error('Error:', error));
+            gaygoobs()
         }
 
         function interceptLinks(baseUrl) {
@@ -69,23 +71,25 @@
                         document.open();
                         document.write(data.content);
                         document.close();
-                        interceptLinks(url);
+                        gaygoobs()
                     } else {
                         document.getElementById('output').innerHTML = 'No HTML content received';
                     }
                 })
                 .catch(error => console.error('Error:', error));
         }
-        var links = document.getElementsByTagName('a');
+        function gaygoobs() {
+            var links = document.getElementsByTagName('a');
 
-        // Loop through each link and add a click event listener
-        for (var i = 0; i < links.length; i++) {
-            links[i].addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent the default link behavior
-                alert('Link clicked: ' + this.textContent); // Alert with the link text
-                var urssl = this.href;
-                gatdata(urssl)
-            });
+            // Loop through each link and add a click event listener
+            for (var i = 0; i < links.length; i++) {
+                links[i].addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default link behavior
+                    alert('Link clicked: ' + this.textContent); // Alert with the link text
+                    var urssl = this.href;
+                    gatdata(urssl)
+                });
+            }
         }
     </script>
 </body>
