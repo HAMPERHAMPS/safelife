@@ -70,7 +70,8 @@
                             let currentUrl = window.location.href;
                             console.log(currentUrl);
                             // Construct full URL using base URL and last part of href
-                            urlsd = lastRemadeURL + '/' + urlsd;
+                            urlsd = lastRemadeURL + urlsd;
+                            urlsd = urlsd + '/';
                             urlsd.replace(currentUrl, "");
                              // Store the last remade URL in the global variable
                             console.log("Attemptus petronum");
