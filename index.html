@@ -7,12 +7,14 @@
 </head>
 <body style="background-image: url('/bg.png'); background-repeat: no-repeat; background-size: cover;">
     <center><h1 style="color: grey">SafeLife</h1></center>
-    <button onclick="getData()">Proxy</button>
+    <div><input id="smashanpass"></input><button onclick="getData()">Proxy</button></div>
     <div id="output"></div>
 
     <script>
         function getData() {
-            var url = 'https://hamperhamps.space/';  // Example URL
+        var inputElement = document.getElementById('smashanpass');
+        function getData() {
+            var url = inputElement.value;  
             fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
                 .then(data => {
