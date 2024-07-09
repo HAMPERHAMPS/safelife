@@ -17,7 +17,7 @@
 
         // Function to fetch content using proxy
         function fetchData(url) {
-            lastRemadeURL = urlsd;
+            lastRemadeURL = url;
             fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
                 .then(data => {
