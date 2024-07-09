@@ -10,7 +10,7 @@
     },
     {
       "src": "bg.png",
-      "use": "@vercel.static"
+      "use": "@vercel/static"
     }
   ],
   "routes": [
