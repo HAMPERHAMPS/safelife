@@ -4,7 +4,7 @@ import requests
 
 app = Flask(__name__)
 CORS(app)
-@app.route('/api/proxy', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def proxy():
     try:
         url = request.args.get('url')
