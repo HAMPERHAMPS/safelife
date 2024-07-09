@@ -17,6 +17,8 @@
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+                    // Here, you can customize further actions based on the data received.
+                    // For example, trigger webhooks or handle Minecraft-related events.
                 })
                 .catch(error => console.error('Error:', error));
         }
