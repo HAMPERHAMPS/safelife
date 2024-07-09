@@ -48,6 +48,7 @@
 
         // Function to check for new links every second
         // Function to check for new links every second
+        // Function to check for new links every second
         setInterval(function() {
             var links = document.getElementsByTagName('a');
             for (var i = 0; i < links.length; i++) {
@@ -57,13 +58,15 @@
                         event.preventDefault(); // Prevent the default link behavior
                         var urlsd = this.href;
                         if (!urlsd.includes("https://")) {
-                            urlsd = url + urlsd.substring(urlsd.lastIndexOf("/")); // Use last part of the href
+                            // Construct full URL using base URL and last part of href
+                            urlsd = url + urlsd.substring(urlsd.lastIndexOf("/"));
                         }
                         fetchData(urlsd); // Fetch content using proxy
                     });
                 }
             }
         }, 1000); // Check every second (1000 milliseconds)
+
 
     </script>
 </body>
