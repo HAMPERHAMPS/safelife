@@ -17,6 +17,5 @@
     { "src": "/api/proxy", "dest": "/proxy.py" },
     { "src": "/bg.png", "dest": "/bg.png" },
     { "src": "/(.*)", "dest": "/index.html" }
-    
   ]
 }
