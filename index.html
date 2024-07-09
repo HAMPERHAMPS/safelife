@@ -40,17 +40,20 @@
             }
         }
 
-        // Add click event listener to all <a> tags
-        document.addEventListener('DOMContentLoaded', function() {
+        // Function to check for new links every second
+        setInterval(function() {
             var links = document.getElementsByTagName('a');
             for (var i = 0; i < links.length; i++) {
-                links[i].addEventListener('click', function(event) {
-                    event.preventDefault(); // Prevent the default link behavior
-                    var url = this.href;
-                    fetchData(url); // Fetch content using proxy
-                });
+                if (!links[i].hasAttribute('data-handled')) {
+                    links[i].setAttribute('data-handled', true); // Mark link as handled
+                    links[i].addEventListener('click', function(event) {
+                        event.preventDefault(); // Prevent the default link behavior
+                        var url = this.href;
+                        fetchData(url); // Fetch content using proxy
+                    });
+                }
             }
-        });
+        }, 1000); // Check every second (1000 milliseconds)
     </script>
 </body>
 </html>
