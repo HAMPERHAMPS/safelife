@@ -11,6 +11,26 @@
     <div id="output"></div>
 
     <script>
+
+        function gatdata(linkus) {
+            
+            var url = linkus;  
+
+            fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.content) {
+                        document.open();
+                        document.write(data.content);
+                        document.close();
+                        
+                    } else {
+                        document.getElementById('output').innerHTML = '<p style="color: red;">NYOOOOOoOooOOOo that site doesnt exist.</p>';
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+            
         function getData() {
             var inputElement = document.getElementById('smashanpass');
             var url = inputElement.value;  
@@ -55,6 +75,17 @@
                     }
                 })
                 .catch(error => console.error('Error:', error));
+        }
+        var links = document.getElementsByTagName('a');
+
+        // Loop through each link and add a click event listener
+        for (var i = 0; i < links.length; i++) {
+            links[i].addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent the default link behavior
+                alert('Link clicked: ' + this.textContent); // Alert with the link text
+                var urssl = this.href;
+                gatdata(urssl)
+            });
         }
     </script>
 </body>
