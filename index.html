@@ -7,10 +7,13 @@
 </head>
 <body style="background-image: url('/bg.png'); background-repeat: no-repeat; background-size: cover;">
     <center><h1 style="color: grey">SafeLife</h1></center>
-    <div><input id="smashanpass"></input><button onclick="getData()">Proxy</button></div>
+    <div><input id="smashanpass" /></div>
+    <button onclick="getData()">Proxy</button>
     <div id="output"></div>
 
     <script>
+        var url = null;
+
         // Function to fetch content using proxy
         function fetchData(url) {
             fetch(`http://127.0.0.1:5000/api/proxy?url=${encodeURIComponent(url)}`)
@@ -25,13 +28,16 @@
                         document.getElementById('output').innerHTML = '<p style="color: red;">The site does not exist or could not be fetched.</p>';
                     }
                 })
-                .catch(error => console.error('Error:', error));
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('output').innerHTML = '<p style="color: red;">Error fetching content.</p>';
+                });
         }
 
         // Function to handle form submission
         function getData() {
             var inputElement = document.getElementById('smashanpass');
-            var url = inputElement.value.trim(); // Trim whitespace
+            url = inputElement.value.trim(); // Trim whitespace
             
             if (url) {
                 fetchData(url);
@@ -48,8 +54,11 @@
                     links[i].setAttribute('data-handled', true); // Mark link as handled
                     links[i].addEventListener('click', function(event) {
                         event.preventDefault(); // Prevent the default link behavior
-                        var url = this.href;
-                        fetchData(url); // Fetch content using proxy
+                        var urlsd = this.href;
+                        if (!url.includes("https://")) {
+                            urlsd = url + urlsd;
+                        }
+                        fetchData(urlsd); // Fetch content using proxy
                     });
                 }
             }
