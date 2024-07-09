@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SafeLife</title>
+</head>
+<body>
+    <center><h1 style="color: ></h1></center>
+    <button onclick="getData()">Proxy</button>
+    <div id="output"></div>
+
+    <script>
+        function getData() {
+            var url = 'https://jsonplaceholder.typicode.com/posts/1';  // Example URL
+            fetch(`/api/proxy?url=${encodeURIComponent(url)}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('output').innerText = JSON.stringify(data, null, 2);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
