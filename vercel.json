@@ -1,8 +1,8 @@
 {
   "builds": [
     {
-      "src": "safelife-hub.py",
-      "use": "@vercel/python"
+      "src": "favicon.png",
+      "use": "@vercel/static"
     },
     {
       "src": "index.html",
@@ -14,7 +14,7 @@
     }
   ],
   "routes": [
-    { "src": "/api/proxy", "dest": "/safelife-hub.py" },
+    { "src": "/favicon.png", "dest": "/favicon.png" },
     { "src": "/bg.png", "dest": "/bg.png" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
