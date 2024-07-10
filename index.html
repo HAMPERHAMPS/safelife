@@ -92,7 +92,7 @@
         async function checkWebsiteStatus() {
             try {
                 const response = await fetch(proxyserverd + '/ping');
-                if (response) {
+                if (response.ok) {
                     document.getElementById('status').textContent = 'Status: 🟢';
                 } else {
                     document.getElementById('status').textContent = 'Status: 🔴';
