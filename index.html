@@ -91,8 +91,8 @@
         }, 1000); // Check every second (1000 milliseconds)
         async function checkWebsiteStatus() {
             try {
-                const response = await fetch(proxyserverd);
-                if (response.ok) {
+                const response = await fetch(proxyserverd + '/ping');
+                if (response) {
                     document.getElementById('status').textContent = 'Status: 🟢';
                 } else {
                     document.getElementById('status').textContent = 'Status: 🔴';
