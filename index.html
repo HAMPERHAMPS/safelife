@@ -6,19 +6,25 @@
     <title>SafeLife</title>
 </head>
 <body style="background-image: url('/bg.png'); background-repeat: no-repeat; background-size: cover;">
-    <center><h1 style="color: grey">SafeLife</h1></center>
-    <div><input id="smashanpass" /></div>
-    <button onclick="getData()">Proxy</button>
+    <center><div><h1 style="color: black">Safe</h1><h1 style="color: light-blue;"></h1>Life</h1></div></center>
+    <center><div><input id="smashanpass" />
+    <button onclick="getData()">Proxy</button></div>
     <div id="output"></div>
+    <div><input id="sigmaskibididontquestionit" /><button onclick="setserver()">Change SafeLife Hub</button><p id="ineedtoshit">Status: 🟡</p></div></center>
 
     <script>
         var lastRemadeURL = '';
         var url = null;
-
+        var proxyserverd = 'https://safelifehub.hamperhamps.space/';
+        function setserver() {
+            var inputElement = document.getElementById('sigmaskibididontquestionit');
+            proxyserverd = inputElement.value.trim();
+        }
+            
         // Function to fetch content using proxy
         function fetchData(url) {
             lastRemadeURL = url;
-            fetch(`/api/proxy?url=${encodeURIComponent(url)}`)
+            fetch(proxyserverd + `?url=${encodeURIComponent(url)}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data.content) {
@@ -32,7 +38,7 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    document.getElementById('output').innerHTML = '<p style="color: red;">Error fetching content.</p>';
+                    document.getElementById('output').innerHTML = '<p style="color: red;">Womp Womp. Your SafeLife Hub is down/broken</p>';
                 });
         }
 
@@ -83,6 +89,23 @@
                 }
             }
         }, 1000); // Check every second (1000 milliseconds)
+        async function checkWebsiteStatus() {
+            try {
+                const response = await fetch(proxyserverd);
+                if (response.ok) {
+                    document.getElementById('status').textContent = 'Status: 🟢';
+                } else {
+                    document.getElementById('status').textContent = 'Status: 🔴';
+                }
+            } catch (error) {
+                document.getElementById('status').textContent = 'Error checking website status.';
+                console.error('Error:', error);
+            }
+        }
+
+        // Check website status every 5 seconds (adjust as needed)
+        setInterval(checkWebsiteStatus, 5000);
+                    
 
 
 
