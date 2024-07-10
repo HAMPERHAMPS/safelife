@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SafeLife</title>
+    <meta name="description" content="Really simple proxy made by HAMPER.">
+    <meta name="keywords" content="HTML, CSS, JavaScript, proxy, webproxy, python, server, simple">
+    <meta name="author" content="HAMPER">
 </head>
 <body style="background-image: url('/bg.png'); background-repeat: no-repeat; background-size: cover;">
     <center><div><h1 style="color: black">Safe<a style="color: grey;">Life</a></h1></div></center>
@@ -11,7 +14,10 @@
     <button onclick="getData()">Proxy</button></div>
     <div id="output"></div>
     <div><input id="sigmaskibididontquestionit" /><button onclick="setserver()">Change SafeLife Hub</button><p id="ineedtoshit">Status: 🟡</p></div></center>
-    <a style="position: absolute; bottom: 5px; color: white;" href="https://github.com/HAMPERHAMPS/safelife">SafeLife GitHub <a href="https://github.com/HAMPERHAMPS/safelife-hub/tree/main" style="color: white; position: right; bottom: 5px;">SafeLife Hub GitHub</a></a>
+    <a href="https://github.com/HAMPERHAMPS/safelife" class="safelife-link" style="padding: 10px;">SafeLife GitHub</a>
+    <a href="https://github.com/HAMPERHAMPS/safelife-hub/tree/main" class="safelife-hub-link" style="padding: 10px;">SafeLife Hub GitHub</a>
+    <a href="https://hamperhamps.space" class="personal-website-link" style="padding: 10px;">My Space</a>
+
     <script>
         var lastRemadeURL = '';
         var url = null;
@@ -42,10 +48,10 @@
                 });
         }
 
-        // Function to handle form submission
+       
         function getData() {
             var inputElement = document.getElementById('smashanpass');
-            url = inputElement.value.trim(); // Trim whitespace
+            url = inputElement.value.trim(); 
             
             if (url) {
                 fetchData(url);
@@ -54,13 +60,10 @@
             }
         }
 
-        // Function to check for new links every second
-        // Function to check for new links every second
-        // Function to check for new links every second
-// Define a global variable to store the last remade URL
+
         
 
-        // Function to check for new links every second
+       
         setInterval(function() {
             var links = document.getElementsByTagName('a');
             for (var i = 0; i < links.length; i++) {
@@ -84,7 +87,7 @@
                             console.log("Attemptus petronum");
                             console.log(urlsd);
                         }
-                        fetchData(urlsd); // Fetch content using proxy
+                        fetchData(urlsd);
                     });
                 }
             }
@@ -103,7 +106,7 @@
             }
         }
 
-        // Check website status every 5 seconds (adjust as needed)
+        
         setInterval(checkWebsiteStatus, 1000);
                     
 
