@@ -91,14 +91,14 @@
         }, 1000); // Check every second (1000 milliseconds)
         async function checkWebsiteStatus() {
             try {
-                const response = await fetch(proxyserverd + '/ping');
+                const response = await fetch(proxyserverd + 'ping');
                 if (response.ok) {
-                    document.getElementById('status').textContent = 'Status: 🟢';
+                    document.getElementById('ineedtoshit').textContent = 'Status: 🟢';
                 } else {
-                    document.getElementById('status').textContent = 'Status: 🔴';
+                    document.getElementById('ineedtoshit').textContent = 'Status: 🔴';
                 }
             } catch (error) {
-                document.getElementById('status').textContent = 'Error checking website status.';
+                document.getElementById('ineedtoshit').textContent = 'Status: 🔴';
                 console.error('Error:', error);
             }
         }
