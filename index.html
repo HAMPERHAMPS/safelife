@@ -7,6 +7,7 @@
     <meta name="description" content="Really simple proxy made by HAMPER.">
     <meta name="keywords" content="HTML, CSS, JavaScript, proxy, webproxy, python, server, simple">
     <meta name="author" content="HAMPER">
+    <link rel="icon" type="image/png" href="/favicon.png">
 </head>
 <body style="background-image: url('/bg.png'); background-repeat: no-repeat; background-size: cover;">
     <center><div><h1 style="color: black">Safe<a style="color: grey;">Life</a></h1></div></center>
@@ -27,7 +28,7 @@
             proxyserverd = inputElement.value.trim();
         }
             
-        // Function to fetch content using proxy
+        
         function fetchData(url) {
             lastRemadeURL = url;
             fetch(proxyserverd + `?url=${encodeURIComponent(url)}`)
@@ -37,7 +38,7 @@
                         document.open();
                         document.write(data.content);
                         document.close();
-                        // Perform additional actions if needed
+                        
                     } else {
                         document.getElementById('output').innerHTML = '<p style="color: red;">The site does not exist or could not be fetched.</p>';
                     }
@@ -68,9 +69,9 @@
             var links = document.getElementsByTagName('a');
             for (var i = 0; i < links.length; i++) {
                 if (!links[i].hasAttribute('data-handled')) {
-                    links[i].setAttribute('data-handled', true); // Mark link as handled
+                    links[i].setAttribute('data-handled', true); 
                     links[i].addEventListener('click', function(event) {
-                        event.preventDefault(); // Prevent the default link behavior
+                        event.preventDefault(); 
                         var urlsd = this.href;
                         if (urlsd.includes("http")) {
                             console.log("u good bro");
@@ -79,11 +80,11 @@
                         else {
                             let currentUrl = window.location.href;
                             console.log(currentUrl);
-                            // Construct full URL using base URL and last part of href
+                           
                             urlsd = lastRemadeURL + urlsd;
                             urlsd = urlsd + '/';
                             urlsd.replace(currentUrl, "");
-                             // Store the last remade URL in the global variable
+                             
                             console.log("Attemptus petronum");
                             console.log(urlsd);
                         }
@@ -91,7 +92,7 @@
                     });
                 }
             }
-        }, 1000); // Check every second (1000 milliseconds)
+        }, 1000);
         async function checkWebsiteStatus() {
             try {
                 const response = await fetch(proxyserverd + 'ping');
