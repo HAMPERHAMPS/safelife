@@ -25,7 +25,7 @@
         possible = localStorage.getItem('hub');
         console.log(possible);
         var lastRemadeURL = '';
-        if (possible) {
+        if ("http" in possible) {
             lastRemadeURL = possible;
         }
         var url = null;
