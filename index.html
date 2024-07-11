@@ -25,12 +25,14 @@
         possible = localStorage.getItem('hub');
         console.log(possible);
         var lastRemadeURL = '';
-        if (possible.includes("http")) {
-            proxyserverd = possible;
-        }
+
 
         var url = null;
         var proxyserverd = 'https://safelifehub.hamperhamps.space/';
+
+        if (possible.includes("http")) {
+            proxyserverd = possible;
+        }
         function setserver() {
             var inputElement = document.getElementById('sigmaskibididontquestionit');
             proxyserverd = inputElement.value.trim();
