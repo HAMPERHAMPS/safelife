@@ -9,6 +9,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "sw.js",
+      "use": "@vercel/static"
+    },
+    {
       "src": "bg.png",
       "use": "@vercel/static"
     }
@@ -16,6 +20,7 @@
   "routes": [
     { "src": "/favicon.png", "dest": "/favicon.png" },
     { "src": "/bg.png", "dest": "/bg.png" },
+    { "src": "/sw.js", "dest": "/sw.js" },
     { "src": "/(.*)", "dest": "/index.html" }
   ]
 }
