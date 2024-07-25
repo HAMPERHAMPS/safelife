@@ -122,6 +122,10 @@
             } catch (error) {
                 document.getElementById('ineedtoshit').textContent = 'Status: 🔴';
                 console.error('Error:', error);
+                if (proxyserverd == "https://safelifehub.hamperhamps.space/) {
+                    window.location.href = 'https://safelife.hamperhamps.space/hampernotonline.html';
+                }
+
             }
             document.getElementById('shitta').textContent = 'CURRENT SERVER: ' + proxyserverd;
         }
